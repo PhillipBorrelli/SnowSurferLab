@@ -14,6 +14,9 @@ public class PlayerController : MonoBehaviour
 
     Vector2 moveVector;
     bool canControlPlayer = true;
+    float previousRotation;
+    float totalRotation;
+    int flipCount;
 
     void Start()
     {
@@ -28,6 +31,7 @@ public class PlayerController : MonoBehaviour
         {
             RotatePlayer();
             BoostPlayer();
+            CalculateFlips();
         }   
     }
 
@@ -56,7 +60,23 @@ public class PlayerController : MonoBehaviour
 
         }
 
-    }   
+    }  
+    
+    void CalculateFlips()
+    {
+        float currentRotation = transform.rotation.eulerAngles.z;
+
+        totalRotation += Mathf.DeltaAngle(previousRotation, currentRotation);
+
+        if(totalRotation > 340 || totalRotation < -340)
+        {
+            flipCount += 1;
+            totalRotation = 0;
+            print(flipCount);
+        }
+
+        previousRotation = currentRotation;
+    }
 
     public void DisableControls()
     { 
