@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
 
-public class NewMonoBehaviourScript : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     [SerializeField] float torqueAmount = 1f;
     [SerializeField] float baseSpeed = 15f;
@@ -13,6 +13,8 @@ public class NewMonoBehaviourScript : MonoBehaviour
     SurfaceEffector2D surfaceEffector2D;
 
     Vector2 moveVector;
+    bool canControlPlayer = true;
+
     void Start()
     {
         moveAction = InputSystem.actions.FindAction("Move");
@@ -22,8 +24,11 @@ public class NewMonoBehaviourScript : MonoBehaviour
 
     void Update()
     {
-        RotatePlayer();
-        BoostPlayer();
+        if (canControlPlayer)
+        {
+            RotatePlayer();
+            BoostPlayer();
+        }   
     }
 
     void RotatePlayer()
@@ -52,4 +57,9 @@ public class NewMonoBehaviourScript : MonoBehaviour
         }
 
     }   
+
+    public void DisableControls()
+    { 
+        canControlPlayer = false; 
+    }
 }
