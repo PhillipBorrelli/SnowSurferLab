@@ -1,3 +1,4 @@
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
@@ -81,5 +82,18 @@ public class PlayerController : MonoBehaviour
     public void DisableControls()
     { 
         canControlPlayer = false; 
+    }
+
+    public void ActivatePowerup(PowerUpSO powerup)
+    {
+        if (powerup.GetPowerUpType() == "speed")
+        {
+            baseSpeed += powerup.GetValueChange();
+            boostSpeed += powerup.GetValueChange();
+        }
+        else if (powerup.GetPowerUpType() == "torque")
+        {
+            torqueAmount += powerup.GetValueChange();
+        }
     }
 }
