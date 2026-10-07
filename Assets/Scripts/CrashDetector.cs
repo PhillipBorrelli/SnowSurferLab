@@ -5,6 +5,7 @@ public class CrashDetector : MonoBehaviour
 {
     [SerializeField] float restartDelay = 1f;
     [SerializeField] ParticleSystem crashParticles;
+    [SerializeField] AudioSource crashSound;
 
     PlayerController playerController;
 
@@ -21,6 +22,7 @@ public class CrashDetector : MonoBehaviour
         {
             playerController.DisableControls();
             crashParticles.Play();
+            crashSound.Play();
             Invoke("ReloadScene", restartDelay);
         }
     }

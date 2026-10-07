@@ -5,6 +5,7 @@ public class FinishLine : MonoBehaviour
 {
     [SerializeField] float restartDelay = 1f;
     [SerializeField] ParticleSystem finishParticles;
+    [SerializeField] AudioSource finishSound;
     void OnTriggerEnter2D(Collider2D collision)
     {
         int layerIndex = LayerMask.NameToLayer("Player"); 
@@ -12,6 +13,7 @@ public class FinishLine : MonoBehaviour
         if (collision.gameObject.layer == layerIndex)
         {
             finishParticles.Play();
+            finishSound.Play();
             Invoke("ReloadScene", restartDelay);        
         }
     }
